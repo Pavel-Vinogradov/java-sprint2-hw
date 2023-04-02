@@ -1,19 +1,16 @@
 package core.data_handler;
 
 import model.MonthlyModel;
+import utilities.MonthName;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MonthlyReport {
+public class MonthlyReport  implements MonthName {
     public boolean isReport = false;   // Флаг о проверке отчётов
     public HashMap<String, ArrayList<MonthlyModel>> monthsStat = new HashMap<>();
 
-    String getMonthName(int i) {       // Получить имя месяца
-        String[] months = {"Январь", "Февраль", "Март", "Апрель", "Май", "Июнь",
-                "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"};
-        return months[i - 1];
-    }
+
 
     public void getReport() {      // Прочитать все отчёты и занести в список months
         for (int i = 1; i <= 3; i++) {

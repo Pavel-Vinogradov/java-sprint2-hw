@@ -25,7 +25,7 @@ public class Console {
             }
             if (command == ConsoleCommand.COUNT_YEAR_REPORT.getCommand()) {
                 System.out.println(ConsoleCommand.COUNT_YEAR_REPORT.getDescription());
-                monthlyReport.getReport();
+                yearlyReport.getReport();
                 System.out.println("Все имеющиеся годовые отчеты считаны");
             }
             if (command == ConsoleCommand.VERIFY_REPORT.getCommand()) {
@@ -57,8 +57,6 @@ public class Console {
                 System.out.println("Выход");
                 System.exit(0);
                 break;
-            } else {
-                System.out.println("Неверная команда");
             }
         }
     }

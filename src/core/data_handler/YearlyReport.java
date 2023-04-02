@@ -1,13 +1,15 @@
 package core.data_handler;
 
 import model.YearlyModel;
+import utilities.MonthName;
 
 import java.util.ArrayList;
 
-public class YearlyReport {
+public class YearlyReport implements MonthName {
     public boolean isReport = false;   // Флаг о проверке отчёта
     public ArrayList<YearlyModel> yearStat;
-    void getReport() {      // Считывание годового отчёта
+
+    public void getReport() {      // Считывание годового отчёта
 
         YearlyReader yearlyReader = new YearlyReader("resources/y.2021.csv");
         yearStat = yearlyReader.yearStat;  // Передаём полученные значения файла.
@@ -18,13 +20,13 @@ public class YearlyReport {
         System.out.println("Год 2021");
 
         double monthProfit;
-        for (int i = 0; i < yearStat.size(); i+=2) {       // Вывод выручки за каждый месяц
+        for (int i = 0; i < yearStat.size(); i += 2) {       // Вывод выручки за каждый месяц
             if (yearStat.get(i).isExpense) {       // Если первая запись о месяце о трате
-                monthProfit = yearStat.get(i+1).amount - yearStat.get(i).amount;
+                monthProfit = yearStat.get(i + 1).amount - yearStat.get(i).amount;
             } else {        // Если первая запись о месяце о доходе
-                monthProfit = yearStat.get(i).amount - yearStat.get(i+1).amount;
+                monthProfit = yearStat.get(i).amount - yearStat.get(i + 1).amount;
             }
-            System.out.println("За " + yearStat.get(i).month + " месяц выручка " + monthProfit);
+            System.out.println("За " + getMonthName(Integer.parseInt(yearStat.get(i).month)) + " месяц выручка " + monthProfit);
         }
 
         double expensesSum = 0.0;
