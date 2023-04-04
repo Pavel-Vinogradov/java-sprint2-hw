@@ -4,7 +4,6 @@ import model.MonthlyModel;
 import utilities.FileReader;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MonthlyReader {
