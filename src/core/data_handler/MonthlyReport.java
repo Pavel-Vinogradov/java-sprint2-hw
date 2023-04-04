@@ -6,23 +6,25 @@ import utilities.MonthName;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MonthlyReport  implements MonthName {
+public class MonthlyReport implements MonthName {
     public boolean isReport = false;   // Флаг о проверке отчётов
     public HashMap<String, ArrayList<MonthlyModel>> monthsStat = new HashMap<>();
 
-
-
     public void getReport() {      // Прочитать все отчёты и занести в список months
+        String[] links = {};
+        String monthName = "";
         for (int i = 1; i <= 3; i++) {
             String link = "resources/m.20210" + i + ".csv";
-            MonthlyReader monthlyReader = new MonthlyReader(link);
-            String monthName = getMonthName(i);
-            monthsStat.put(monthName, monthlyReader.month);
+            links = new String[]{link};
+            monthName = getMonthName(i);
         }
+        MonthlyReader monthlyReader = new MonthlyReader(links);
+        monthlyReader.getRecords();
+        monthsStat.put(monthName, monthlyReader.month);
         isReport = true;
     }
-    public void genMonthsInfo() {      // Вывод информации о месячных отчётах
 
+    public void genMonthsInfo() {
         for (String monthName : monthsStat.keySet()) {
             double maxProfit = 0.0;
             String bestGood = "";
@@ -36,13 +38,13 @@ public class MonthlyReport  implements MonthName {
                     if (maxProfit < monthlyModel.quantity * monthlyModel.sumOfOne) {
                         maxProfit = monthlyModel.quantity * monthlyModel.sumOfOne;
                         bestGood = monthlyModel.itemName;
-                        bestGoodSum = monthlyModel.sumOfOne;
+                        bestGoodSum = maxProfit;
                     }
                 } else {                        // Находим самую большую трату
                     if (maxExpense < monthlyModel.quantity * monthlyModel.sumOfOne) {
                         maxExpense = monthlyModel.quantity * monthlyModel.sumOfOne;
                         maxExpenseGood = monthlyModel.itemName;
-                        maxExpenseSum = monthlyModel.sumOfOne;
+                        maxExpenseSum = maxExpense;
                     }
                 }
             }

@@ -8,11 +8,11 @@ import java.util.ArrayList;
 public class YearlyReport implements MonthName {
     public boolean isReport = false;   // Флаг о проверке отчёта
     public ArrayList<YearlyModel> yearStat;
-
+    public static final String  Years = "resources/y.2021.csv";
+    YearlyReader yearlyReader = new YearlyReader(Years);
     public void getReport() {      // Считывание годового отчёта
-
-        YearlyReader yearlyReader = new YearlyReader("resources/y.2021.csv");
-        yearStat = yearlyReader.yearStat;  // Передаём полученные значения файла.
+        yearlyReader.getRecords();
+        yearStat = yearlyReader.yearStat;
         isReport = true;
     }
 
