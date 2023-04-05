@@ -11,16 +11,15 @@ public class MonthlyReport implements MonthName {
     public HashMap<String, ArrayList<MonthlyModel>> monthsStat = new HashMap<>();
 
     public void getReport() {      // Прочитать все отчёты и занести в список months
-        String[] links = {};
-        String monthName = "";
+        MonthlyReader monthlyReader = new MonthlyReader(new String[]{});
+        String monthName;
         for (int i = 1; i <= 3; i++) {
             String link = "resources/m.20210" + i + ".csv";
-            links = new String[]{link};
+            monthlyReader.path = new String[]{link};
             monthName = getMonthName(i);
+            monthlyReader.getRecords();
+            monthsStat.put(monthName, monthlyReader.month);
         }
-        MonthlyReader monthlyReader = new MonthlyReader(links);
-        monthlyReader.getRecords();
-        monthsStat.put(monthName, monthlyReader.month);
         isReport = true;
     }
 

@@ -19,6 +19,7 @@ public class MonthlyReader {
     public void getRecords() {
         for (String path : path) {
             List<String> lines = fileReader.readFileContents(path); // Читаем csv, разделяет на строки
+            month = new ArrayList<>();
             for (int i = 1; i < lines.size(); i++) {   // Перебираем каждую строку
                 String line = lines.get(i);
                 String[] parts = line.split(",");   // Каждую строку csv добавляет в объект
